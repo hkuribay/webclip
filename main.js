@@ -1,7 +1,6 @@
 var $=require('jquery');
 var jqueryui=require('jquery-ui');
 var html2canvas=require('html2canvas');
-document.write("[print] ");
 
 if(!HTMLCanvasElement.prototype.toBlob){
   HTMLCanvasElement.prototype.toBlob = function(callback, type, encoderOptions){

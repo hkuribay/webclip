@@ -47,7 +47,6 @@
 	var $=__webpack_require__(1);
 	var jqueryui=__webpack_require__(2);
 	var html2canvas=__webpack_require__(4);
-	document.write("[print] ");
 
 	if(!HTMLCanvasElement.prototype.toBlob){
 	  HTMLCanvasElement.prototype.toBlob = function(callback, type, encoderOptions){
