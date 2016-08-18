@@ -4,13 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/hkuribay/webclip.git"
   },
-  "author": "hkuribay",
+  "author": "hiroshi kuribayashi",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hkuribay/webclip/issues"
