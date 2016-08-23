@@ -48,9 +48,12 @@
 	  var scripts = document.getElementsByTagName('script');
 	  var lastScript = scripts[scripts.length-1];
 	  var scriptName = lastScript;
-	  return scriptName.getAttribute(name);
+	  return {baseurl: scriptName.getAttribute("data-baseurl"),
+	    udocname: scriptName.getAttribute("data-udocname")}
 	}
-	var baseurl = getSyncScriptParams("data-baseurl");
+	var scparams = getSyncScriptParams("data-baseurl");
+	var baseurl = scparams.baseurl;
+	var udocname = scparams.udocname;
 	__webpack_require__(1);
 	__webpack_require__(5);
 	__webpack_require__(7);
@@ -94,10 +97,17 @@
 	  var posx=el.position().left+window.scrollX, width =el.width();
 	  var posy=el.position().top +window.scrollY, height=el.height();
 	  var wi = window.open('about:blank',"",'width=800,height=600');
+	  el.remove();
 	  // キャプチャ
 	  html2canvas(document.body
-	  ).then(function(canvas) {
-	    el.remove();
+	  ).then(function(canvas0) {
+	    var canvas = document.createElement("canvas");
+	    canvas.width =width;
+	    canvas.height=height;
+	    imgdata = canvas0.getContext("2d").getImageData(posx,posy,width,height);
+	    var ctx = canvas.getContext("2d");
+	    ctx.createImageData(imgdata);
+	    ctx.putImageData(imgdata,0,0);
 	    canvas.toBlob(
 	      function(blob){
 	        var formData = new FormData();
@@ -107,7 +117,7 @@
 	          data: formData
 	        }).done(function(json){
 	          var imgurl = json.url;
-	          url = "/sys/ud/corpus/new?"+
+	          url = "/sys/ud/"+udocname+"/new?"+
 	          jQuery.param({nomenu: "true",
 	           "udoc[capture_url]": imgurl,
 	           "udoc[user_agent]": navigator.userAgent,
